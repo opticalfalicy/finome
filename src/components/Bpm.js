@@ -8,6 +8,7 @@ export default class Bpm extends React.Component {
       bpm: Number,
       dispBpm: 120,
     };
+    // this.checkChange = this.checkChange.bind (this);
   }
 
   componentDidMount () {
@@ -25,11 +26,41 @@ export default class Bpm extends React.Component {
     });
   }
 
+  _handleKeyDown = e => {
+    const re = /^[0-9\b]+$/;
+    if (
+      (e.key === 'Enter' && e.target.value === '') ||
+      re.test (e.target.value)
+    ) {
+      this.setState ({
+        bpm: e.target.value,
+      });
+
+      console.log (this.state.bpm, 'bpm');
+    }
+  };
+
+  // checkChange (e) {
+  //   const re = /^[0-9\b]+$/;
+  //   if (e.target.value === '' || re.test (e.target.value)) {
+  //     this.setState ({value: e.target.value});
+  //   }
+  // }
+
   render () {
     let bpm = this.state.bpm;
+    // console.log (bpm, 'bpm');
     return (
       <div className="bpm-div">
-        <h1 className="bpm-text">{this.state.dispBpm}</h1>
+        {/* <h1 className="bpm-text">{this.state.dispBpm}</h1> */}
+        <h1 className="bpm-text">BPM</h1>
+        <input
+          // value={120}
+          onInput={this._handleKeyDown}
+          onKeyDown={this._handleKeyDown}
+          onChange={value => this.getVal (value)}
+          className="bpm-val"
+        />
       </div>
     );
   }
