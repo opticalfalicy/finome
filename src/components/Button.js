@@ -32,39 +32,66 @@ class Button extends React.Component {
     super (props);
     this.state = {
       // False Initially
-      // counting: false,
+      counting: false,
       // playing: false,
       // 120 Initially.
       bpm: this.props.bpm,
+      play: false,
+      pause: true,
     };
-    audio = new Audio (soundfile);
+    let audio = new Audio (soundfile);
+    this.audio = audio;
   }
   // audio = new Audio ('tempblock.mp3');
+
+  play = () => {
+    this.setState ({play: true, pause: false});
+    this.audio.play ();
+  };
 
   counterHandler = () => {
     // block.play ();
     let counting;
     const ubpm = this.props.bpm;
-    this.setState ({
-      counting: !this.state.counting,
-    });
+    // this.setState ({
+    //   counting: !this.state.counting,
+    //   play: !this.state.play,
+    //   pause: !this.state.pause,
+    // });
+    let aud = this.audio;
+    let inter;
 
-    if (this.state.counting == true) {
+    if (this.state.counting !== true) {
       // console.log (block, 'block');
-      let counting = setInterval (function () {
-        return Sound.status.PLAYING;
+      this.setState ({
+        counting: !this.state.counting,
+        // play: true,
+        // pause: false,
+      });
+      inter = setInterval (function () {
+        // return this.audio.play ();
+        aud.play ();
+        // return Sound.status.PLAYING;
         // block.play (success => {
         //   console.log ('successfully finished playing');
         // });
       }, ubpm);
-    } else if (this.state.counting == false) {
-      clearInterval (counting);
-      return Sound.status.STOPPED;
+      // clearInterval (inter);
+      // } else if (this.state.counting !== false) {
+    } else {
+      console.log (inter, 'elseinter');
+      this.setState ({
+        counting: !this.state.counting,
+        //   play: false,
+        //   pause: true,
+      });
+      aud.pause ();
+      // return Sound.status.STOPPED;
     }
-    let playing;
-    playing = !this.state.playing;
-    console.log (playing);
-    return playing;
+    // let playing;
+    // playing = !this.state.playing;
+    // console.log (playing);
+    // return playing;
 
     // this.setState
   };
