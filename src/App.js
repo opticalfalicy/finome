@@ -11,7 +11,7 @@ class App extends React.Component {
     super (props);
     this.handleBpmChange = this.handleBpmChange.bind (this);
     this.state = {
-      counting: false,
+      // counting: false
       bpm: 120,
     };
   }

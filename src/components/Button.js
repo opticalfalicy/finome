@@ -49,7 +49,8 @@ class Button extends React.Component {
     this.audio.play ();
   };
 
-  counterHandler = () => {
+  counterHandler = event => {
+    event.preventDefault ();
     // block.play ();
     let counting;
     const ubpm = this.props.bpm;
@@ -60,34 +61,38 @@ class Button extends React.Component {
     // });
     let aud = this.audio;
     let inter;
+    this.setState ({
+      counting: !this.state.counting,
+      // play: true,
+      // pause: false,
+    });
+    console.log (this.state.counting);
 
-    if (this.state.counting !== true) {
-      // console.log (block, 'block');
-      this.setState ({
-        counting: !this.state.counting,
-        // play: true,
-        // pause: false,
-      });
-      inter = setInterval (function () {
-        // return this.audio.play ();
-        aud.play ();
-        // return Sound.status.PLAYING;
-        // block.play (success => {
-        //   console.log ('successfully finished playing');
-        // });
-      }, ubpm);
-      // clearInterval (inter);
-      // } else if (this.state.counting !== false) {
-    } else {
-      console.log (inter, 'elseinter');
-      this.setState ({
-        counting: !this.state.counting,
-        //   play: false,
-        //   pause: true,
-      });
-      aud.pause ();
-      // return Sound.status.STOPPED;
-    }
+    // if (this.state.counting === false) {
+    // this.playHandler ();
+    // console.log (block, 'block');
+    // inter = setInterval (function () {
+    // return this.audio.play ();
+    // aud.play ();
+    // return Sound.status.PLAYING;
+    // block.play (success => {
+    //   console.log ('successfully finished playing');
+    // });
+    // }, ubpm);
+    // clearInterval (inter);
+    // } else if (this.state.counting !== false) {
+    // }
+    // else if (this.state.counting === true) {
+    //   // console.log (inter, 'elseinter');
+    //   this.setState ({
+    //     counting: !this.state.counting,
+    //     //   play: false,
+    //     //   pause: true,
+    //   });
+    //   console.log (this.state.counting);
+    //   // aud.pause ();
+    //   // return Sound.status.STOPPED;
+    // }
     // let playing;
     // playing = !this.state.playing;
     // console.log (playing);
@@ -96,24 +101,38 @@ class Button extends React.Component {
     // this.setState
   };
 
-  // playHandler = () => {
-  //   let counting = this.state.counting;
-  //   const ubpm = this.props.bpm;
-  //   console.log (counting);
-  //   if (counting === true) {
-  //     // console.log (block, 'block');
-  //     counting = setInterval (function () {
-  //       // return console.log ('playing');
-  //       return Sound.status.PLAYING;
-  //       // block.play (success => {
-  //       //   console.log ('successfully finished playing');
-  //       // });
-  //     }, 1);
-  //   }
-  //   if (counting == false) {
-  //     clearInterval (counting);
-  //     return Sound.status.STOPPED;
-  //   }
+  playHandler = () => {
+    let counting = this.state.counting;
+    let countOn;
+    const ubpm = this.props.bpm;
+    let aud = this.audio;
+    // console.log (counting);
+    // if (counting !== true) {
+    // console.log (block, 'block');
+    countOn = setInterval (function () {
+      // return console.log ('playing');
+      // return this.audio.play ();
+      aud.play ();
+      // block.play (success => {
+      //   console.log ('successfully finished playing');
+      // });
+    }, 120);
+    console.log ('playing');
+    // }
+    // else if (counting !== false) {
+    //   console.log ('pausing', countOn);
+    //   aud.pause ();
+    //   return clearInterval (countOn);
+    // }
+  };
+
+  pauseHandler = () => {
+    let aud = this.audio;
+    let counting = this.state.counting;
+    // if (counting !== false) {
+    aud.pause ();
+    // }
+  };
 
   //   console.log (Sound.status);
   //   // if (counting == true) {
@@ -126,19 +145,31 @@ class Button extends React.Component {
 
   componentDidMount () {
     this.setState ({
-      counting: this.props.counting,
+      // counting: false,
       bpm: this.props.bpm,
     });
   }
   render () {
+    console.log (this.props.counting, 'mount');
     let textToggle;
     let playTog = this.state.counting;
 
     if (this.state.counting === true) {
-      textToggle = <h1 className="button-text">Touch To Stop</h1>;
+      textToggle = (
+        <div className="button-control button-play" onClick={this.pauseHandler}>
+          <h1 className="button-text">Touch To Stop</h1>
+        </div>
+      );
     }
     if (this.state.counting === false) {
-      textToggle = <h1 className="button-text">Touch To Start</h1>;
+      textToggle = (
+        <div
+          onClick={this.playHandler}
+          className="button-control button-pause "
+        >
+          <h1 className="button-text">Touch To Start</h1>
+        </div>
+      );
     }
     return (
       <div className="button-div" onClick={this.counterHandler}>
