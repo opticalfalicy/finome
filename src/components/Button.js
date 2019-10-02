@@ -41,6 +41,7 @@ class Button extends React.Component {
     };
     let audio = new Audio (soundfile);
     this.audio = audio;
+    this.inval = null;
   }
   // audio = new Audio ('tempblock.mp3');
 
@@ -50,50 +51,24 @@ class Button extends React.Component {
   };
 
   counterHandler = () => {
-    // block.play ();
-    let counting;
     const ubpm = this.props.bpm;
-    // this.setState ({
-    //   counting: !this.state.counting,
-    //   play: !this.state.play,
-    //   pause: !this.state.pause,
-    // });
     let aud = this.audio;
     let inter;
 
     if (this.state.counting !== true) {
-      // console.log (block, 'block');
       this.setState ({
         counting: !this.state.counting,
-        // play: true,
-        // pause: false,
       });
-      inter = setInterval (function () {
-        // return this.audio.play ();
+      this.inval = setInterval (function () {
         aud.play ();
-        // return Sound.status.PLAYING;
-        // block.play (success => {
-        //   console.log ('successfully finished playing');
-        // });
       }, ubpm);
-      // clearInterval (inter);
-      // } else if (this.state.counting !== false) {
-    } else {
-      console.log (inter, 'elseinter');
+    } else if (this.state.counting !== false) {
       this.setState ({
         counting: !this.state.counting,
-        //   play: false,
-        //   pause: true,
       });
+      clearInterval (this.inval);
       aud.pause ();
-      // return Sound.status.STOPPED;
     }
-    // let playing;
-    // playing = !this.state.playing;
-    // console.log (playing);
-    // return playing;
-
-    // this.setState
   };
 
   // playHandler = () => {
