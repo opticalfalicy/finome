@@ -29,7 +29,7 @@ export default class Bpm extends React.Component {
   _handleKeyDown = e => {
     const re = /^[0-9\b]+$/;
     if (
-      (e.key === 'Enter' && e.target.value === '') ||
+      (e.keyCode === 13 && e.target.value === '') ||
       re.test (e.target.value)
     ) {
       this.setState ({
@@ -38,6 +38,12 @@ export default class Bpm extends React.Component {
 
       console.log (this.state.bpm, 'bpm');
     }
+    // e.preventDefault ();
+    console.log ('enter)');
+  };
+
+  handleChange = e => {
+    this.setState ({bpm: e.target.value});
   };
 
   // checkChange (e) {
@@ -54,13 +60,21 @@ export default class Bpm extends React.Component {
       <div className="bpm-div">
         {/* <h1 className="bpm-text">{this.state.dispBpm}</h1> */}
         <h1 className="bpm-text">BPM</h1>
-        <input
-          // value={120}
-          onInput={this._handleKeyDown}
-          onKeyDown={this._handleKeyDown}
-          onChange={value => this.getVal (value)}
-          className="bpm-val"
-        />
+        <form className="bpm-form">
+          <input
+            // value={120}
+            // onInput={this._handleKeyDown}
+            onKeyDown={this._handleKeyDown}
+            onChange={this.handleChange}
+            value={bpm}
+            onValueChange={value => this.getVal (value)}
+            className="bpm-val"
+            placeholder={this.state.dispBpm}
+          >
+            {/* {this.state.dispBpm} */}
+            {/* 120 */}
+          </input>
+        </form>
       </div>
     );
   }
