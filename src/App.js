@@ -21,15 +21,11 @@ class App extends React.Component {
   }
 
   render () {
+    console.log (this.state.bpm, 'bpm');
     return (
       <div className="main-div">
         <Button counting={this.state.counting} bpm={this.props.bpm} />
         <Bpm bpm={this.props.bpm} handleBpmChange={this.handleBpmChange} />
-        <Sound
-          url={'./Paperweight.mp3'}
-          // autoLoad={true}
-          playStatus={Sound.status.PLAYING}
-        />
       </div>
     );
   }
