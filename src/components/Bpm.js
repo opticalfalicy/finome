@@ -11,7 +11,7 @@ export default class Bpm extends React.Component {
     // this.checkChange = this.checkChange.bind (this);
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.setState ({
       bpm: this.props.bpm,
     });
@@ -27,13 +27,17 @@ export default class Bpm extends React.Component {
   // }
 
   _handleKeyDown = e => {
+    console.log()
     let eV = e.target.value;
     let val = eV;
     let dispVal = val;
     const re = /^[0-9\b]+$/;
     if (e.key === 'Enter') {
       e.preventDefault ();
-      val = 60000 / val;
+      val = (60000 / val)
+      // val = val / 95
+
+      this.props.handleBpmChange(val);
       this.setState ({
         bpm: val,
         dispBpm: dispVal,
@@ -49,8 +53,10 @@ export default class Bpm extends React.Component {
     let eV = e.target.value;
 
     const re = /^[0-9\b]+$/;
-    if (eV === '' || (re.test (eV) && eV <= 300)) {
-      this.setState ({dispBpm: eV});
+    if (eV === '' || (re.test (eV))) {
+      if(eV <= 300) this.setState ({dispBpm: eV});
+      // else alert('BPM must be between 60 and 100')
+      
     }
   };
 
@@ -72,6 +78,7 @@ export default class Bpm extends React.Component {
             // value={120}
             // onInput={this._handleKeyDown}
             onKeyPress={this._handleKeyDown}
+            // onSubmit={this.handleBpmChange}
             onChange={this.handleChange}
             value={this.state.dispBpm}
             // onValueChange={value => this.getVal (value)}

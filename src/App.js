@@ -12,20 +12,27 @@ class App extends React.Component {
     this.handleBpmChange = this.handleBpmChange.bind (this);
     this.state = {
       counting: false,
-      bpm: 120,
+      bpm: 60000 / 120,
     };
   }
 
   handleBpmChange (bpm) {
+    // let eV = e.target.value;
+    // e.preventDefault ();
     this.setState ({bpm});
+
+    // const re = /^[0-9\b]+$/;
+    // if (eV === '' || (re.test (eV) && eV <= 300)) {
+    // }
+    // this.setState ({bpm});
   }
 
   render () {
     console.log (this.state.bpm, 'bpm');
     return (
       <div className="main-div">
-        <Button counting={this.state.counting} bpm={this.props.bpm} />
-        <Bpm bpm={this.props.bpm} handleBpmChange={this.handleBpmChange} />
+        <Button counting={this.state.counting} bpm={this.state.bpm} />
+        <Bpm bpm={this.state.bpm} handleBpmChange={this.handleBpmChange} />
       </div>
     );
   }
