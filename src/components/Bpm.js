@@ -74,7 +74,7 @@ export default class Bpm extends React.Component {
         {/* <h1 className="bpm-text">{this.state.dispBpm}</h1> */}
         <h1 className="bpm-text">BPM</h1>
         <form className="bpm-form">
-          <input
+          {/* <input
             // value={120}
             // onInput={this._handleKeyDown}
             onKeyPress={this._handleKeyDown}
@@ -87,7 +87,8 @@ export default class Bpm extends React.Component {
           >
             {/* {this.state.dispBpm} */}
             {/* 120 */}
-          </input>
+          {/* </input>  */}
+          <input type="range" min="60" max="300" className="bpm-val"  label={this.state.dispBpm} onChange={this.handleBpmChange}  />
         </form>
       </div>
     );
