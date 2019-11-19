@@ -2,9 +2,47 @@
   width: 15%
   height: 15%
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  // align-content: space-around
+  flex-direction: column;
+  
+  .bpm-form
+    // height: ?px;
 
   .bpm-text
     color: rgb(225, 102, 205)
-    font-size: 3rem;
+    font-size: 2.7rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  .bpm-val
+    color: rgb(240, 13, 202)
+    background: black;
+    border-style: inset;
+    border-color: rgb(99, 8, 84)
+    box-shadow: 0 0 0px 2px rgb(95, 24, 83)
+
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    text-align: center;
+    // width: 210px;
+    width: 60vw
+    height: 10vh
+    font-size: 4.8vw
+    font-weight: 700
+    @media screen and ( min-width: 800px )
+      width: 35vw
+      height: 10vh
+      font-size: 2.6vw
+
+
+      
+    // text-decoration: underline;
+  
+  // .bpm-ent
+  //     font-size: 3rem
+  //     border: rgb(124, 16, 106) inset 5px;
+  //     // width: 50px
+  //     color: rgb(150, 18, 128);
+  //     // height: 50px
+  //     background: black;
+    

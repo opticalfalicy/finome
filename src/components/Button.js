@@ -39,6 +39,7 @@ class Button extends React.Component {
       play: false,
       pause: true,
       playing: true,
+      initState: this.props.initState,
     };
     let audio = new Audio (soundfile);
     this.audVal = null;
@@ -126,10 +127,13 @@ class Button extends React.Component {
     let textToggle;
     let playTog = this.state.counting;
 
-    if (this.state.counting === true) {
+    // if(this.props.initState === true){
+    //   textToggle= <h1 className="button-text"> </h1>
+    // }
+    if (this.state.counting === true && this.props.initState === false) {
       textToggle = <h1 className="button-text">Touch To Stop</h1>;
     }
-    if (this.state.counting === false) {
+    if (this.state.counting === false && this.props.initState === false) {
       textToggle = <h1 className="button-text">Touch To Start</h1>;
     }
     return (

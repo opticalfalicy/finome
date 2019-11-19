@@ -6,7 +6,7 @@ export default class Bpm extends React.Component {
     super (props);
     this.state = {
       bpm: this.props.bpm,
-      dispBpm: 120,
+      dispBpm: 'SET BPM. PRESS ENT',
     };
     // this.checkChange = this.checkChange.bind (this);
   }
@@ -60,6 +60,11 @@ export default class Bpm extends React.Component {
     }
   };
 
+  clearText = () => {
+
+    this.setState({dispBpm: '', entState: true});
+  }
+
   // checkChange (e) {
   //   const re = /^[0-9\b]+$/;
   //   if (e.target.value === '' || re.test (e.target.value)) {
@@ -69,10 +74,15 @@ export default class Bpm extends React.Component {
 
   render () {
     let bpm = this.state.bpm;
+
+    let entText;
+    if(this.state.entState == true){
+      entText = <button className="bpm-ent">Enter</button>
+    }
     return (
       <div className="bpm-div">
         {/* <h1 className="bpm-text">{this.state.dispBpm}</h1> */}
-        <h1 className="bpm-text">BPM</h1>
+        {/* <h1 className="bpm-text">BPM</h1> */}
         <form className="bpm-form">
           <input
             // value={120}
@@ -81,6 +91,7 @@ export default class Bpm extends React.Component {
             // onSubmit={this.handleBpmChange}
             onChange={this.handleChange}
             value={this.state.dispBpm}
+            onClick={this.clearText}
             // onValueChange={value => this.getVal (value)}
             className="bpm-val"
             placeholder={this.state.dispBpm}
@@ -89,6 +100,8 @@ export default class Bpm extends React.Component {
             {/* 120 */}
           </input>
         </form>
+          {/* {entText} */}
+          
       </div>
     );
   }
